@@ -48,7 +48,7 @@ public abstract class EdgeConvertCreateDDL {
          }
       }
    }catch(Exception e){
-      System.err.println("Fatal error occurred: " + e.getMessage());
+      logger.log(Level.FINE, "Debug message: " + e.getMessage(), e);
       logger.log(Level.SEVERE, "Fatal error occurred: " + e.getMessage(), e);
       EdgeConvertGUI.setReadSuccess(false);
    }
@@ -65,8 +65,8 @@ public abstract class EdgeConvertCreateDDL {
       }
       
       catch (Exception e) {
+         logger.log(Level.FINE, "Debug message: " + e.getMessage()); // Debug log
          // tracing using sysout
-         System.err.println("Error occurred while retrieving table: " + e.getMessage());
          logger.log(Level.WARNING, "Error occurred while retrieving table: " + e.getMessage(), e);//error logs
       }
       return null;

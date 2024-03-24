@@ -312,11 +312,15 @@ public class EdgeConvertFileParser {
          }
       } // try
       catch (FileNotFoundException fnfe) {
+         logger.log(Level.FINE, "Debug message:  " + fnfe.getMessage()); // Debug log
+
          logger.log(Level.WARNING, "Cannot find file: " + inputFile.getName(), fnfe);//error logs
          System.out.println("Cannot find \"" + inputFile.getName() + "\".");
          System.exit(0);
       } // catch FileNotFoundException
       catch (IOException ioe) {
+         logger.log(Level.FINE, "Debug message:  " + ioe.getMessage()); // Debug log
+
          logger.log(Level.WARNING, "IO Exception occurred: " + ioe.getMessage(), ioe);//error logs
          System.out.println(ioe);
          System.exit(0);

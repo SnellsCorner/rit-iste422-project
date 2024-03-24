@@ -7,6 +7,8 @@ public class RunEdgeConvert {
       try {
          EdgeConvertGUI edge = new EdgeConvertGUI();
       } catch (Exception e) {
+         logger.log(Level.FINE, "Debug message:  " + e.getMessage()); // Debug log
+
          logger.log(Level.SEVERE, "An unexpected error occurred: " + e.getMessage(), e);
       }
    }

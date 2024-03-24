@@ -302,18 +302,18 @@ public class EdgeConvertFileParser {
                br.close();
                this.makeArrays(); //convert ArrayList objects into arrays of the appropriate Class type
             } else { //the file chosen is something else
-               logger.error("Unrecognized file format: " + inputFile.getName());
+               // logger.error("Unrecognized file format: " + inputFile.getName());
                JOptionPane.showMessageDialog(null, "Unrecognized file format");
             }
          }
       } // try
       catch (FileNotFoundException fnfe) {
-         logger.error("Cannot find file: " + inputFile.getName(), fnfe);
+         // logger.error("Cannot find file: " + inputFile.getName(), fnfe);
          System.out.println("Cannot find \"" + inputFile.getName() + "\".");
          System.exit(0);
       } // catch FileNotFoundException
       catch (IOException ioe) {
-         logger.error("IO Exception occurred: " + ioe.getMessage(), ioe);
+         // logger.error("IO Exception occurred: " + ioe.getMessage(), ioe);
          System.out.println(ioe);
          System.exit(0);
       } // catch IOException

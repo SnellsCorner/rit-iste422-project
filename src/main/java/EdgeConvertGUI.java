@@ -453,6 +453,8 @@ public class EdgeConvertGUI {
                      return;
                   }
                } catch (NumberFormatException nfe) {
+                  logger.log(Level.FINE, "Debug message:  " + nfe.getMessage()); // Debug log
+
                   JOptionPane.showMessageDialog(null, "\"" + result + "\" is not a number");
                   jtfDTVarchar.setText(Integer.toString(EdgeField.VARCHAR_DEFAULT_LENGTH));
                   return;
@@ -918,6 +920,8 @@ public class EdgeConvertGUI {
             //close the file
             pw.close();
          } catch (IOException ioe) {
+            logger.log(Level.FINE, "Debug message:  " + ioe.getMessage()); // Debug log
+
             System.out.println(ioe);
          }
          dataSaved = true;
@@ -986,6 +990,8 @@ public class EdgeConvertGUI {
               }
               resultFiles = filenames.toArray(new File[0]);
           } catch (IOException ioe) {
+               logger.log(Level.FINE, "Debug message:  " + ioe.getMessage()); // Debug log
+
               throw new RuntimeException(ioe);
           }
       } 
