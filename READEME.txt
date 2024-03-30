@@ -7,3 +7,9 @@
 Any additional interactions noted? (Dialog boxes, etc)
 
 is a team member assigned to each class implementation?
+
+Erich - EdgeConvertCreateDDL
+Ivan - EdgeField
+Chloe - EdgeTable
+Junheng - edgeconvertfileparser 
+Jason Chen - CreateDDLMySQL
