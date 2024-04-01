@@ -1,0 +1,15 @@
+...includes GitHub link?
+
+... includes how to compile and run tests?
+
+... describes how to know that tests have failed? E.g. console output? examine file? something else?
+
+Any additional interactions noted? (Dialog boxes, etc)
+
+is a team member assigned to each class implementation?
+
+Erich - EdgeConvertCreateDDL
+Ivan - EdgeField
+Chloe - EdgeTable
+Junheng - edgeconvertfileparser 
+Jason Chen - CreateDDLMySQL
