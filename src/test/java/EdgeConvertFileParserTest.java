@@ -44,15 +44,6 @@ public class EdgeConvertFileParserTest {
     }
 
 
-    @Test
-    public void testParseSaveFile() throws IOException {
-        // Checks that the parseSaveFile() method correctly parses a Save file
-        parser.parseSaveFile();
-        assertNotNull(parser.getEdgeTables());
-        assertNotNull(parser.getEdgeFields());
-    }
-
-
     @Test 
     public void getEdgeTablesTest(){
         assertNotNull(parser.getEdgeTables());

@@ -145,6 +145,16 @@ public class EdgeFieldTest {
     }
 
     @Test
+    public void testToggleDisallowNullFlag() {
+        // Ensure disallow null flag is initially false
+        assertFalse(edgeField.getDisallowNull());
+        
+        // Toggle disallow null flag to true
+        edgeField.setDisallowNull(true);
+        assertTrue(edgeField.getDisallowNull());
+    }
+
+    @Test
     public void testSetAndGetTableIDBoundaryMAX() {
         //Checks if the tableID is able to go past the max value
         edgeField.setTableID(Integer.MAX_VALUE); 
@@ -155,5 +165,42 @@ public class EdgeFieldTest {
         assertNotEquals(originalTableID, edgeField.getTableID()); // Check if the max value has been changed
     }
 
-    
+    @Test
+    public void testSetMaxIntegerAsFieldBound() {
+        // Checks if field bound can go past the max value
+        edgeField.setFieldBound(Integer.MAX_VALUE);
+        int original = edgeField.getFieldBound();
+
+        edgeField.setFieldBound(Integer.MAX_VALUE + 1);
+        assertNotEquals(original, edgeField.getFieldBound()); // Check if the original max value is different than current
+    }
+
+    @Test
+    public void testSetNegativeVarcharValueAfterDataTypeChange() {
+        // Checks if method will retain previous valid value if the previous value is invalid
+        edgeField.setDataType(2);
+        edgeField.setVarcharValue(10);
+
+        int previous = edgeField.getVarcharValue();
+        edgeField.setDataType(0);
+
+        // invalid value -5
+        edgeField.setVarcharValue(-5);
+        assertEquals(previous, edgeField.getVarcharValue()); //value should remain the previous valid value
+    }
+
+    @Test
+    public void testUpdateDefaultValueAfterSettingDataType() {
+        // Set data type to Integer
+        edgeField.setDataType(2);
+        edgeField.setDefaultValue("100");
+        
+        // Change data type to Double
+        edgeField.setDataType(3);
+        edgeField.setDefaultValue("200");
+
+        // Value should be able to be updated to 200 even if the data type changes
+        assertEquals("200", edgeField.getDefaultValue());
+    }
+
 }
