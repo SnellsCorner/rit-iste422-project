@@ -8,12 +8,17 @@ public class EdgeTable {
    private ArrayList alRelatedTables, alNativeFields;
    private int[] relatedTables, relatedFields, nativeFields;
    
+   public EdgeTable(){
+      // default constructor
+   }
+
+   @SuppressWarnings("rawtypes")
    public EdgeTable(String inputString) {
       StringTokenizer st = new StringTokenizer(inputString, EdgeConvertFileParser.DELIM);
       numFigure = Integer.parseInt(st.nextToken());
       name = st.nextToken();
-      alRelatedTables = new ArrayList();
-      alNativeFields = new ArrayList();
+      alRelatedTables = new ArrayList(10);
+      alNativeFields = new ArrayList(10);
    }
    
    public int getNumFigure() {
@@ -26,6 +31,7 @@ public class EdgeTable {
       return name;
    }
    
+   @SuppressWarnings({ "removal", "unchecked" })
    public void addRelatedTable(int relatedTable) {
       alRelatedTables.add(new Integer(relatedTable));
       logger.info("Added the related table: " + relatedTable);
@@ -51,6 +57,7 @@ public class EdgeTable {
       return nativeFields;
    }
 
+   @SuppressWarnings({ "removal", "unchecked" })
    public void addNativeField(int value) {
       alNativeFields.add(new Integer(value));
       logger.info("Added the Native Field: " + value);
