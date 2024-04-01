@@ -20,7 +20,7 @@ public class EdgeFieldTest {
     @Test
     public void testGetNumFigure() {
         // Checks that the getNumFigure() method returns the correct value of numFigure
-        assertEquals(1, edgeField.getNumFigure());
+        assertEquals("Should return default 1 value for numFigure", 1, edgeField.getNumFigure());
     }
 
     @Test
@@ -143,4 +143,17 @@ public class EdgeFieldTest {
             assertEquals(i, edgeField.getDataType());
         }
     }
+
+    @Test
+    public void testSetAndGetTableIDBoundaryMAX() {
+        //Checks if the tableID is able to go past the max value
+        edgeField.setTableID(Integer.MAX_VALUE); 
+        assertEquals(Integer.MAX_VALUE, edgeField.getTableID());
+
+        int originalTableID = edgeField.getTableID();
+        edgeField.setTableID(Integer.MAX_VALUE + 1);
+        assertNotEquals(originalTableID, edgeField.getTableID()); // Check if the max value has been changed
+    }
+
+    
 }
