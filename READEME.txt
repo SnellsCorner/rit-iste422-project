@@ -8,19 +8,26 @@ User might need to go into the src directory instead of the root directory of th
 User should open the file corresponding to each test file before running the test files
 User should have the junit test installed if running on VsCode
 
-EdgeFieldTest CreateDDLMySQLTest- 
+EdgeFieldTest, CreateDDLMySQLTest, EdgeConvertCreateDDLTest- 
     On VsCode, run the test file by clicking the run button on the top right of the window
     Run the test file and check the test results by the green check next to each test or a red X for invalid tests
     They can also be viewed by checking the Test Results nad Debug Console tabs next to the terminal
 
 
 ... describes how to know that tests have failed? E.g. console output? examine file? something else?
-EdgeFieldTest CreateDDLMySQLTest- 
+EdgeFieldTest, CreateDDLMySQLTest, EdgeConvertCreateDDLTest- 
     Failed tests should have a red X next to the failed before within the test file
 
 Any additional interactions noted? (Dialog boxes, etc)
 
 Discuss any tests that are still failing including why they're failing and what you've tried to resolve it.
+
+EdgeConvertCreateDDLTest - The test fails to run and gives this error 
+    java.lang.NullPointerException: Cannot invoke "String.length()" because "str" is null
+    at java.base/java.util.StringTokenizer.(StringTokenizer.java:199)
+    at java.base/java.util.StringTokenizer.(StringTokenizer.java:221)
+    at EdgeTable.(EdgeTable.java:17)
+    at EdgeConvertCreateDDLTest.setUp(EdgeConvertCreateDDLTest.java:21)
 
 CreateDDLMySQLTest- there are fails that are 
 java.lang.NumberFormatException: For input string: "Field1"
