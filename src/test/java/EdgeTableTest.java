@@ -1,6 +1,5 @@
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 import org.junit.Before;
@@ -12,8 +11,8 @@ public class EdgeTableTest {
 
     @Before
     public void setUp() {
-        edgeTable = new EdgeTable("1|Table|0|0|false|false");
-        edgeTable2 = new EdgeTable("2|EdgeTable|0|0|false|false");
+        edgeTable = new EdgeTable("1|Table");
+        edgeTable2 = new EdgeTable("2|EdgeTable");
 
     }
 

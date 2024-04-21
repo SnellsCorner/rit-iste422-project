@@ -1,5 +1,4 @@
 import static org.junit.Assert.*;
-import org.junit.*;
 
 import java.io.File;
 import java.io.IOException;

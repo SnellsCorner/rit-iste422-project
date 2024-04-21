@@ -10,7 +10,6 @@ public class EdgeConvertFileParser {
    private File parseFile;
    private FileReader fr;
    private BufferedReader br;
-   private String currentLine;
    private ArrayList alTables, alFields, alConnectors;
    private EdgeTable[] tables;
    private EdgeField[] fields;
@@ -18,8 +17,6 @@ public class EdgeConvertFileParser {
    private EdgeConnector[] connectors;
    private String style;
    private String text;
-   private String tableName;
-   private String fieldName;
    private boolean isEntity, isAttribute, isUnderlined = false;
    private int numFigure, numConnector, numFields, numTables, numNativeRelatedFields;
    private int endPoint1, endPoint2;
@@ -44,6 +41,7 @@ public class EdgeConvertFileParser {
    }
 
    public void parseEdgeFile() throws IOException {
+       String currentLine;
       while ((currentLine = br.readLine()) != null) {
          currentLine = currentLine.trim();
          if (currentLine.startsWith("Figure ")) { //this is the start of a Figure entry
@@ -198,6 +196,9 @@ public class EdgeConvertFileParser {
    
    public void parseSaveFile() throws IOException { //this method is unclear and confusing in places
       logger.info("Parsing file");
+      String tableName;
+      String fieldName;
+      String currentLine;
       StringTokenizer stTables, stNatFields, stRelFields, stNatRelFields, stField;
       EdgeTable tempTable;
       EdgeField tempField;
@@ -289,6 +290,7 @@ public class EdgeConvertFileParser {
    }
    
    public void openFile(File inputFile) {
+      String currentLine;
       try {
          logger.info("Opening file: " + inputFile);
          fr = new FileReader(inputFile);
