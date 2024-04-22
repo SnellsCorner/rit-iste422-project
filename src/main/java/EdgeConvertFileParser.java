@@ -10,7 +10,9 @@ public class EdgeConvertFileParser {
    private File parseFile;
    private FileReader fr;
    private BufferedReader br;
-   private ArrayList alTables, alFields, alConnectors;
+   private ArrayList<EdgeTable> alTables;
+   private ArrayList<EdgeField> alFields;
+   private ArrayList<EdgeConnector> alConnectors;
    private EdgeTable[] tables;
    private EdgeField[] fields;
    private EdgeField tempField;
@@ -30,9 +32,9 @@ public class EdgeConvertFileParser {
    public EdgeConvertFileParser(File constructorFile) {
       numFigure = 0;
       numConnector = 0;
-      alTables = new ArrayList();
-      alFields = new ArrayList();
-      alConnectors = new ArrayList();
+      alTables = new ArrayList<>();
+      alFields = new ArrayList<>();
+      alConnectors = new ArrayList<>();
       isEntity = false;
       isAttribute = false;
       parseFile = constructorFile;

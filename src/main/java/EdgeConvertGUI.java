@@ -39,7 +39,8 @@ public class EdgeConvertGUI {
    private EdgeField currentDTField, currentDRField1, currentDRField2; //pointers to currently selected field(s) on Define Tables (DT) and Define Relations (DR) screens
    private static boolean readSuccess = true; //this tells GUI whether to populate JList components or not
    private boolean dataSaved = true;
-   private ArrayList alSubclasses, alProductNames;
+   private ArrayList<EdgeConvertCreateDDL> alSubclasses;
+   private ArrayList<String> alProductNames;
    private String[] productNames;
    private Object[] objSubclasses;
 
@@ -930,8 +931,8 @@ public class EdgeConvertGUI {
    private void setOutputDir() {
       int returnVal;
       outputDirOld = outputDir;
-      alSubclasses = new ArrayList();
-      alProductNames = new ArrayList();
+      alSubclasses = new ArrayList<>();
+      alProductNames = new ArrayList<>();
 
       returnVal = jfcOutputDir.showOpenDialog(null);
       
@@ -1014,7 +1015,7 @@ public class EdgeConvertGUI {
                   conResultClass = resultClass.getConstructor(paramTypes);
                   objOutput = conResultClass.newInstance(args);
                }
-               alSubclasses.add(objOutput);
+               alSubclasses.add((EdgeConvertCreateDDL) objOutput);
                Method getProductName = resultClass.getMethod("getProductName", null);
                String productName = (String)getProductName.invoke(objOutput, null);
                alProductNames.add(productName);
