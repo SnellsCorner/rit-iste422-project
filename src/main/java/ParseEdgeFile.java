@@ -1,4 +1,7 @@
 import java.io.IOException;
+import java.util.StringTokenizer;
+import java.io.File;
+import javax.swing.JOptionPane;
 
 public class ParseEdgeFile extends EdgeConvertFileParser {
     public ParseEdgeFile(File constructorFile) {
@@ -94,6 +97,11 @@ public class ParseEdgeFile extends EdgeConvertFileParser {
            } // if("Connector")
         } // while()
      } // parseEdgeFile()
+
+     @Override
+    protected void parseSaveFile() throws IOException {
+        // Implementation of the parseSaveFile() method for ParseEdgeFile class
+    }
 
     // Other methods specific to Save files here
 }

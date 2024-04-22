@@ -43,7 +43,7 @@ java.lang.NumberFormatException: For input string: "Field1"
 is a team member assigned to each class implementation?
 
 
-EdgeTableTest CreateDDLMySQLTest- 
+EdgeTableTest- 
     On VSCode, on the sidebar to the left there should be a test tube icon. Press this icon to run the tests. 
     Press the play button that will appear when hovered over the file name and if the tests are successful, a green check mark will appear next to every working test
     However, if the tests fail then a red dot with a circle around it will appear along with the reason for error on the test file.

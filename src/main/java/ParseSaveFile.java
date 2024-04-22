@@ -1,7 +1,10 @@
 import java.io.IOException;
+import java.util.StringTokenizer;
+import java.io.File;
+import javax.swing.JOptionPane;
 
-public class ParseEdgeFile extends EdgeConvertFileParser {
-    public ParseEdgeFile(File constructorFile) {
+public class ParseSaveFile extends EdgeConvertFileParser {
+    public ParseSaveFile(File constructorFile) {
         super(constructorFile);
     }
 
@@ -48,6 +51,7 @@ public class ParseEdgeFile extends EdgeConvertFileParser {
            currentLine = br.readLine(); //this should be "\n"
            currentLine = br.readLine(); //this should be either the next "Table: ", #Fields#
         }
+
         while ((currentLine = br.readLine()) != null) {
            stField = new StringTokenizer(currentLine, DELIM);
            numFigure = Integer.parseInt(stField.nextToken());
@@ -63,9 +67,17 @@ public class ParseEdgeFile extends EdgeConvertFileParser {
            if (stField.hasMoreTokens()) { //Default Value may not be defined
               tempField.setDefaultValue(stField.nextToken());
            }
+
            alFields.add(tempField);
+
         }
+
      } // parseSaveFile()
+
+     @Override
+    protected void parseEdgeFile() throws IOException {
+        // Implementation of the parseEdgeFile() method for ParseSaveFile class
+    }
 
     // Other methods specific to Save files here
 }

@@ -3,35 +3,39 @@ import java.util.*;
 import javax.swing.*;
 import java.util.logging.Logger;
 import java.util.logging.Level;
+import java.io.File;
+import java.util.StringTokenizer;
+import javax.swing.JOptionPane;
 
-import java.io.*;
-import java.util.*;
-import javax.swing.*;
-import java.util.logging.Logger;
-import java.util.logging.Level;
+
+
 
 public abstract class EdgeConvertFileParser {
-    private static final Logger logger = Logger.getLogger(EdgeConvertFileParser.class.getName());
-    private File parseFile;
-    private FileReader fr;
-    private BufferedReader br;
-    private String currentLine;
-    private ArrayList<EdgeTable> alTables;
-    private ArrayList<EdgeField> alFields;
-    private ArrayList<EdgeConnector> alConnectors;
-    private EdgeTable[] tables;
-    private EdgeField[] fields;
-    private EdgeField tempField;
-    private EdgeConnector[] connectors;
-    private String style;
-    private String text;
-    private String tableName;
-    private String fieldName;
-    private boolean isEntity, isAttribute, isUnderlined = false;
-    private int numFigure, numConnector, numFields, numTables, numNativeRelatedFields;
-    private int endPoint1, endPoint2;
-    private String endStyle1, endStyle2;
+    protected static final Logger logger = Logger.getLogger(EdgeConvertFileParser.class.getName());
+    protected File parseFile;
+    protected FileReader fr;
+    protected BufferedReader br;
+    protected String currentLine;
+    protected ArrayList<EdgeTable> alTables;
+    protected ArrayList<EdgeField> alFields;
+    protected ArrayList<EdgeConnector> alConnectors;
+    protected EdgeTable[] tables;
+    protected EdgeField[] fields;
+    protected EdgeField tempField;
+    protected EdgeConnector[] connectors;
+    protected String style;
+    protected String text;
+    protected String tableName;
+    protected String fieldName;
+    protected boolean isEntity, isAttribute, isUnderlined = false;
+    protected int numFigure, numConnector, numFields, numTables, numNativeRelatedFields;
+    protected int endPoint1, endPoint2;
+    protected String endStyle1, endStyle2;
     public static final String DELIM = "|";
+    protected int numLine = 0;
+    protected static final String EDGE_ID = "EDGE";
+    protected static final String SAVE_ID = "SAVE";
+
 
     public EdgeConvertFileParser(File constructorFile) {
         numFigure = 0;
@@ -68,6 +72,7 @@ public abstract class EdgeConvertFileParser {
                fieldIndex = fIndex; //identify which element of the fields array that endPoint2 was found in
             }
          }
+
          for (int tIndex = 0; tIndex < tables.length; tIndex++) { //search tables array for endpoints
             if (endPoint1 == tables[tIndex].getNumFigure()) { //found endPoint1 in tables array
                connectors[cIndex].setIsEP1Table(true); //set appropriate flag
@@ -100,18 +105,21 @@ public abstract class EdgeConvertFileParser {
          
          if (fieldIndex >=0 && fields[fieldIndex].getTableID() == 0) { //field has not been assigned to a table yet
             if (connectors[cIndex].getIsEP1Table()) { //endpoint1 is the table
-               tables[table1Index].addNativeField(fields[fieldIndex].getNumFigure()); //add to the appropriate table's field list
-               fields[fieldIndex].setTableID(tables[table1Index].getNumFigure()); //tell the field what table it belongs to
+                tables[table1Index].addNativeField(fields[fieldIndex].getNumFigure()); //add to the appropriate table's field list
+                fields[fieldIndex].setTableID(tables[table1Index].getNumFigure()); //tell the field what table it belongs to
             } else { //endpoint2 is the table
-               tables[table2Index].addNativeField(fields[fieldIndex].getNumFigure()); //add to the appropriate table's field list
-               fields[fieldIndex].setTableID(tables[table2Index].getNumFigure()); //tell the field what table it belongs to
+                tables[table2Index].addNativeField(fields[fieldIndex].getNumFigure()); //add to the appropriate table's field list
+                fields[fieldIndex].setTableID(tables[table2Index].getNumFigure()); //tell the field what table it belongs to
             }
-         } else if (fieldIndex >=0) { //field has already been assigned to a table
+        } else if (fieldIndex >=0) { //field has already been assigned to a table
             JOptionPane.showMessageDialog(null, "The attribute " + fields[fieldIndex].getName() + " is connected to multiple tables.\nPlease resolve this and try again.");
             EdgeConvertGUI.setReadSuccess(false); //this tells GUI not to populate JList components
-            break; //stop processing list of Connectors
-         }
+            break; //stop processing 
+            // list of Connectors
+        }
+        
       } // connectors for() loop
+
    } // resolveConnectors()
 
    protected void makeArrays() { //convert ArrayList objects into arrays of the appropriate Class type
