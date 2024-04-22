@@ -7,6 +7,7 @@ import java.util.*;
 import java.util.logging.*;
 
 public class CreateDDLMySQL extends EdgeConvertCreateDDL {
+    
     Logger logger = Logger.getLogger(CreateDDLMySQL.class.getName());
 
     protected String databaseName;
