@@ -1,6 +1,6 @@
-import java.io.File;
 import java.io.IOException;
-
+import java.util.StringTokenizer;
+import java.io.File;
 import javax.swing.JOptionPane;
 
 public class ParseEdgeFile extends EdgeConvertFileParser {
@@ -10,7 +10,6 @@ public class ParseEdgeFile extends EdgeConvertFileParser {
 
     @Override
     public void parseEdgeFile() throws IOException {
-      String currentLine;
         while ((currentLine = br.readLine()) != null) {
            currentLine = currentLine.trim();
            if (currentLine.startsWith("Figure ")) { //this is the start of a Figure entry
@@ -98,6 +97,11 @@ public class ParseEdgeFile extends EdgeConvertFileParser {
            } // if("Connector")
         } // while()
      } // parseEdgeFile()
+
+     @Override
+    protected void parseSaveFile() throws IOException {
+        // Implementation of the parseSaveFile() method for ParseEdgeFile class
+    }
 
     // Other methods specific to Save files here
 }

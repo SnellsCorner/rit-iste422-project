@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
+import javax.swing.filechooser.FileFilter;
 import java.io.*;
 import java.util.*;
 import java.util.jar.JarEntry;
@@ -30,7 +31,7 @@ public class EdgeConvertGUI {
    EdgeRadioButtonListener radioListener;
    EdgeWindowListener edgeWindowListener;
    CreateDDLButtonListener createDDLListener;
-   private EdgeConvertFileParser ecfp;
+   private ParseEdgeFile ecfp;
    private EdgeConvertCreateDDL eccd;
    private static PrintWriter pw;
    private EdgeTable[] tables; //master copy of EdgeTable objects
@@ -39,8 +40,7 @@ public class EdgeConvertGUI {
    private EdgeField currentDTField, currentDRField1, currentDRField2; //pointers to currently selected field(s) on Define Tables (DT) and Define Relations (DR) screens
    private static boolean readSuccess = true; //this tells GUI whether to populate JList components or not
    private boolean dataSaved = true;
-   private ArrayList<EdgeConvertCreateDDL> alSubclasses;
-   private ArrayList<String> alProductNames;
+   private ArrayList alSubclasses, alProductNames;
    private String[] productNames;
    private Object[] objSubclasses;
 
@@ -931,8 +931,8 @@ public class EdgeConvertGUI {
    private void setOutputDir() {
       int returnVal;
       outputDirOld = outputDir;
-      alSubclasses = new ArrayList<>();
-      alProductNames = new ArrayList<>();
+      alSubclasses = new ArrayList();
+      alProductNames = new ArrayList();
 
       returnVal = jfcOutputDir.showOpenDialog(null);
       
@@ -1015,9 +1015,9 @@ public class EdgeConvertGUI {
                   conResultClass = resultClass.getConstructor(paramTypes);
                   objOutput = conResultClass.newInstance(args);
                }
-               alSubclasses.add((EdgeConvertCreateDDL) objOutput);
-               Method getProductName = resultClass.getMethod("getProductName", null);
-               String productName = (String)getProductName.invoke(objOutput, null);
+               alSubclasses.add(objOutput);
+               Method getProductName = resultClass.getMethod("getProductName", (Class[]) null);
+               String productName = (String)getProductName.invoke(objOutput, (Object[]) null);
                alProductNames.add(productName);
             }
          }
@@ -1198,7 +1198,7 @@ public class EdgeConvertGUI {
             returnVal = jfcEdge.showOpenDialog(null);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                parseFile = jfcEdge.getSelectedFile();
-               ecfp = new EdgeConvertFileParser(parseFile);
+               ecfp = new ParseEdgeFile(parseFile);
                tables = ecfp.getEdgeTables();
                for (int i = 0; i < tables.length; i++) {
                   tables[i].makeArrays();
@@ -1237,7 +1237,7 @@ public class EdgeConvertGUI {
             returnVal = jfcEdge.showOpenDialog(null);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                saveFile = jfcEdge.getSelectedFile();
-               ecfp = new EdgeConvertFileParser(saveFile);
+               ecfp = new ParseEdgeFile(saveFile);
                tables = ecfp.getEdgeTables();
                fields = ecfp.getEdgeFields();
                ecfp = null;
