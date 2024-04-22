@@ -1,7 +1,7 @@
 import java.io.IOException;
 
-public class ParseEdgeFile extends EdgeConvertFileParser {
-    public ParseEdgeFile(File constructorFile) {
+public class ParseSaveFile extends EdgeConvertFileParser {
+    public ParseSaveFile(File constructorFile) {
         super(constructorFile);
     }
 
