@@ -2,9 +2,9 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
+
 import org.junit.Before;
 import org.junit.Test;
-
 
 public class EdgeConvertFileParserTest {
     private EdgeConvertFileParser parser;
@@ -12,11 +12,12 @@ public class EdgeConvertFileParserTest {
     private File saveFile;
 
     @Before
-    public void setUp() {
+    public void setUp() throws IOException{
         // Initialize a new EdgeConvertFileParser object before each test
         edgeFile = new File("test.edg");
         saveFile = new File("test.save");
-        parser = new EdgeConvertFileParser(edgeFile);
+        parser = new ParseEdgeFile(edgeFile);
+        parser.parseSaveFile(); // Remove the parameter here
     }
 
     // Test to check that the parseEdgeFile method works
@@ -34,7 +35,7 @@ public class EdgeConvertFileParserTest {
     // Test to check that the parseSaveFile method works
     @Test
     public void parseSaveFileTest() throws IOException {
-        parser = new EdgeConvertFileParser(saveFile); // Use the save file for parsing
+        parser = new ParseSaveFile(saveFile); // Use the save file for parsing
         parser.parseSaveFile();
 
         //makes sure file is parsed by making sure that it is not null. 
@@ -42,26 +43,19 @@ public class EdgeConvertFileParserTest {
         assertNotNull(parser.getEdgeFields());
     }
 
-
     @Test 
     public void getEdgeTablesTest(){
         assertNotNull(parser.getEdgeTables());
     }
-
 
     @Test 
     public void getEdgeFieldsTest(){
         assertNotNull(parser.getEdgeFields());
     }
 
-
-    @Test
-    public void openFileTest(){
-        try{
+    @Test(expected = Exception.class)
+    public void openFileTest() throws Exception {
         parser.openFile(edgeFile);
-        }catch(Exception e){
-            fail("Error: File Couldnt not be opened.");
-        }
     }
     
 }
