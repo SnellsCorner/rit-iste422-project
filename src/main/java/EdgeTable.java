@@ -14,6 +14,7 @@ public class EdgeTable {
 
    @SuppressWarnings("rawtypes")
    public EdgeTable(String inputString) {
+      
       StringTokenizer st = new StringTokenizer(inputString, EdgeConvertFileParser.DELIM);
       numFigure = Integer.parseInt(st.nextToken());
       name = st.nextToken();

@@ -1,0 +1,20 @@
+
+
+
+Refactored File Parsing Methods:
+
+    Improved Modularity: The file parsing logic has been encapsulated within separate classes, ParseEdgeFile and ParseSaveFile, to enhance modularity and maintainability.
+
+    Clear Separation of Concerns: Each class is responsible for parsing a specific file format, promoting clear separation of concerns and improving code readability.
+
+    Abstract Base Class: The EdgeConvertFileParser class now serves as an abstract base class for file parsing operations, providing a common interface for subclasses.
+
+    Enhanced Code Organization: By refactoring the parsing methods into separate classes, the codebase is now more organized and adheres to industry-standard design patterns.
+
+Integration of ParseEdgeFile Class:
+
+    Updated File Parsing Logic: The EdgeConvertGUI now utilizes the ParseEdgeFile class for parsing Edge Diagrammer files, replacing the previous method implementation.
+
+    Streamlined File Handling: The integration of the ParseEdgeFile class simplifies file handling within the GUI, resulting in cleaner and more efficient code.
+
+    Improved Error Handling: The GUI benefits from enhanced error handling mechanisms provided by the ParseEdgeFile class, ensuring robustness and reliability during file parsing operations.
